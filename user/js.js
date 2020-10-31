@@ -55,10 +55,36 @@ function login() {
     else{
         window.location.href = "../";
     }
-    setTimeout(login, 3000);
+    setTimeout(login, 20000);
 }
 function logout() {
     Cookies.remove('username')
     Cookies.remove('password')
     window.location.href = '../'
+}
+function start() {
+    if (Cookies.get('username') != null) {
+        var gu = BASE64.decode(Cookies.get('username'))
+        if (Cookies.get('password') != null) {
+            let gp = BASE64.decode(Cookies.get('password'))
+            let gur = us.indexOf(md5(gu))
+            if (gur != '-1') {
+                var gpr = ps[gur]
+            }
+            if (gur != '-1', gpr == md5(gp)) {
+                document.getElementById('welcome').innerHTML = gu
+            }
+            else {
+                if (Cookies.get('username') != null) {
+                    Cookies.remove('username')
+                    if (Cookies.get('password') != null) {
+                        Cookies.remove('password')
+                    }
+                }
+            }
+        }
+    }
+    else{
+        window.location.href = "../";
+    }
 }
